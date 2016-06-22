@@ -1,0 +1,220 @@
+﻿<Window x:Class="DiffEq.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+        xmlns:cp="clr-namespace:DropDownCustomColorPicker;assembly=CustomColorPicker"
+        Icon="Icons/icon.png"
+        PreviewKeyDown="WindowKeyDown"
+        Title="DiffEq" Width="982" Height="620"   Background="#F0F0F0" MinHeight="550" MinWidth="400">
+
+    <DockPanel >
+
+        <Canvas Height="22" Background="AliceBlue" DockPanel.Dock="Top">
+            <Menu BorderThickness="0" Height="22" Canvas.Left="72" Width="3282">
+            </Menu>
+            <Menu BorderThickness="0" Height="21" Width="72" >
+                <MenuItem BorderThickness="0" Header="Файл" Height="21" Width="43">
+                    <MenuItem BorderThickness="0" Header="Новый"  Click="New_Click">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/new.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem BorderThickness="0" Header="Открыть" Click="Open_Click">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20"  Source="Icons/open.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem BorderThickness="0" Header="Сохранить" Click="Save_Click">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/Save.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem BorderThickness="0" Header="Сохранить как" Click="SaveAs_Click">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/Save-as.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem BorderThickness="0" Header="Сохранить изображение" Margin="0,0,-43,0" Click="SavePicture_Click" >
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/Save_picture.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem BorderThickness="0" Header="Сохранить лог" Margin="0,0,-43,0" Click="SaveLog_Click">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/Save_log.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem BorderThickness="0" Header="Выход" Click="Quit_Click">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/quit.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <Menu BorderThickness="0" Height="21" Canvas.Left="43" Width="57">
+                <MenuItem BorderThickness="0" Header="Правка" Width="57" Height="21">
+                    <MenuItem BorderThickness="0" Name="MenuCancel" Header="Отменить"  Height="21" Click="CancelAction_Click" Margin="0,0,-38.667,0">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20"   Source="Icons/cancel.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem BorderThickness="0" Name="MenuReturn" Header="Вернуть" Height="20" Click="ReturnAction_Click" Margin="0,0,-37.667,0" >
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20"  Source="Icons/return.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem BorderThickness="0" Header="Очистить полотно"  Height="20" Click="ButtonClear_Click" Margin="0,0,-50.333,0" >
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/clear_field.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem BorderThickness="0" Header="Очистить консоль"  Height="21" Click="ButtonClearConsole_Click" Margin="0,0,-24.333,0" >
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/clear_text.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem BorderThickness="0"  Header="Параметры полотна" Height="21" Click="PrefOpen_Click" Margin="0,0,-8.667,0">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="Icons/parameters.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+
+            </Menu>
+            <Menu BorderThickness="0" Height="21" Canvas.Left="100" Width="66">
+                <MenuItem BorderThickness="0" Header="Справка" Width="66" Height="21" Click="Help_Click"/>
+            </Menu>
+        </Canvas>
+
+
+
+        <DockPanel LastChildFill="False" DockPanel.Dock="Left"  Width="246"  >
+            <StackPanel DockPanel.Dock="Top" Height="375" Margin="1,0,10,0">
+                <GroupBox Header="Построить график функции:" Margin="0,10,0,0">
+                    <StackPanel Margin="0 5 0 0">
+                        <DockPanel LastChildFill="False">
+                            <TextBlock Text="f(x) =  " Width="77" TextAlignment="Right" VerticalAlignment="Center" />
+                            <TextBox x:Name="TBFunction" DockPanel.Dock="Right" Height="22" TextWrapping="Wrap" Text="Exp(x*x)" Width="144"/>
+                        </DockPanel>
+
+                        <DockPanel LastChildFill="False" Margin="0 4 0 0">
+                            <TextBlock Text="Цвет:  " Width="77" TextAlignment="Right" VerticalAlignment="Center"/>
+                            <cp:CustomColorPicker DockPanel.Dock="Right"  VerticalAlignment="Center" Width="146" x:Name="CPFunction"></cp:CustomColorPicker>
+                        </DockPanel>
+
+                        <DockPanel Margin="0 4 0 0" LastChildFill="False">
+                            <TextBlock Text="Толщина:  " Width="77" TextAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Name="TBFuncThinkness" IsReadOnly="True" DockPanel.Dock="Right">1</TextBox>
+                            <Slider Name="SLFuncThinkness" Height="26" DockPanel.Dock="Right" Width="123" Maximum="10" Minimum="1" Value="2" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="SLFuncThinkness_ValueChanged"/>
+                        </DockPanel>
+
+                        <Button Content="Построить" HorizontalAlignment="Right" Margin="0,5,0,0" Click="ButtonFunc_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+
+                <GroupBox Header="Построить решение&#xA;дифференциального уравнения:"  Margin="0,10,0,0">
+                    <StackPanel  Margin="0 5 0 0">
+                        <DockPanel LastChildFill="False">
+                            <TextBlock Text="y'(x,y) =  " Width="77" TextAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox x:Name="TBEquation" DockPanel.Dock="Right" Height="22" TextWrapping="Wrap" Text="Sin(x)" Width="144"/>
+                        </DockPanel>
+
+                        <DockPanel LastChildFill="False" Margin="0 4 0 0">
+                            <TextBlock Text="Цвет:  " Width="77" TextAlignment="Right" VerticalAlignment="Center"/>
+                            <cp:CustomColorPicker DockPanel.Dock="Right"  VerticalAlignment="Center" Width="146" x:Name="CPEquation" ></cp:CustomColorPicker>
+                        </DockPanel>
+
+                        <DockPanel Margin="0 4 0 0" LastChildFill="False">
+                            <TextBlock Text="Толщина:  " Width="77" TextAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Name="TBEquationThinkness" IsReadOnly="True" DockPanel.Dock="Right">1</TextBox>
+                            <Slider Name="SLEquationThinkness" Height="26" DockPanel.Dock="Right" Width="123" Maximum="10" Minimum="1" Value="2" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="SLEquationThinkness_ValueChanged"/>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <Label Content="    x0 ="/>
+                            <TextBox x:Name="TBX0" Height="23" Width="70" TextWrapping="Wrap" Text="0"/>
+                            <Label Content=" y0 ="/>
+                            <TextBox x:Name="TBY0" Height="23"  Width="70" TextWrapping="Wrap" Text="0"/>
+                        </DockPanel>
+
+                        <DockPanel>
+
+                        </DockPanel>
+
+                        <Button Content="Построить" x:Name="Построить" HorizontalAlignment="Right" Margin="0,5,0,0" Click="ButtonDiffEq_Click"/>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <Button Name="ButtonClear" Content="Очистить полотно" Margin="0,10,0,0" Click="ButtonClear_Click"/>
+
+            </StackPanel>
+            <Border DockPanel.Dock="Bottom"  BorderBrush="Black" BorderThickness="0,2,0,0">
+                <ScrollViewer Name="SVConsole"  Background="White">
+                    <ContextMenuService.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Очистить"  Click="ButtonClearConsole_Click">
+                                <MenuItem.Icon>
+                                    <Image Width="20" Height="20" Source="Icons/clear_text.ico" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Сохранить в файл" Click="SaveLog_Click">
+                                <MenuItem.Icon>
+                                    <Image Width="20" Height="20" Source="Icons/save_log.ico" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ContextMenuService.ContextMenu>
+                    <RichTextBox  Name="TBConsole" IsReadOnly="True" MinHeight="180">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="3"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
+                </ScrollViewer>
+            </Border>
+        </DockPanel>
+
+
+
+
+        <Border BorderBrush="Black" BorderThickness="2,0,0,0" Background="White"  Margin="0,0,0,0">
+            <d3:ChartPlotter Name="Field" Margin="0,0,0,0" MouseRightButtonDown="Field_MouseRightButtonDown">
+                <ContextMenuService.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Построить решение через эту точку" Click="BuildSilutionAtPoint_Click" >
+                            <MenuItem.Icon>
+                                <Image Width="20" Height="20" Source="Icons/build_solution.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Сохранить изображение" Click="SavePicture_Click" >
+                            <MenuItem.Icon>
+                                <Image Width="20" Height="20" Source="Icons/save_picture.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Очистить полотно" Click="ButtonClear_Click">
+                            <MenuItem.Icon>
+                                <Image Width="20" Height="20" Source="Icons/clear_field.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Параметры полотна"  Click="PrefOpen_Click">
+                            <MenuItem.Icon>
+                                <Image Width="20" Height="20" Source="Icons/parameters.ico" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                    </ContextMenu>
+                </ContextMenuService.ContextMenu>
+            </d3:ChartPlotter>
+        </Border>
+
+    </DockPanel>
+
+</Window>

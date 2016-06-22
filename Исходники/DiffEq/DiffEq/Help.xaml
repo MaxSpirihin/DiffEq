@@ -1,0 +1,66 @@
+﻿<Window x:Class="DiffEq.Help"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Справка" 
+        Icon="Icons/icon.png" Height="390" MaxHeight="390"  MinHeight="390"  MinWidth="684.333" Width="684.333"   MaxWidth="684.333"  WindowStartupLocation="CenterScreen" Background="#FFFFFF">
+    <Grid Margin="0,0,3.667,0.333">
+
+        <Border BorderBrush="Gray" BorderThickness="1 0 1 0" Margin="0,0,571.667,0.333" >
+            <StackPanel  Background="#E0E0E0" Margin="-0.333,0,-106,0.333">
+                <Border BorderBrush="Gray" BorderThickness="0 0 0 1" >
+                    <Button  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Center"  VerticalAlignment="Center" Content="Обзор возможностей" Height="27" Width="197" Margin="0,0,-0.333,0" Click="Desc_click"/>
+                </Border>
+                <Border BorderBrush="Gray" BorderThickness="0 0 0 1" >
+                    <Button  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Center"  VerticalAlignment="Center" Content="Использование выражений" Height="27" Width="197" Margin="0,0,-0.333,0" Click="Math_click"/>
+                </Border>
+                <Border BorderBrush="Gray" BorderThickness="0 0 0 1">
+                    <Button  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Center"  VerticalAlignment="Center" Content="Горячие клавиши" Height="27" Width="197" Margin="0,0,-0.333,0" Click="But_click"/>
+                </Border>
+                <Border BorderBrush="Gray" BorderThickness="0 0 0 1">
+                    <Button  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Center"  VerticalAlignment="Center" Content="Алгоритм" Height="27" Width="197" Margin="0,0,-0.333,0" Click="Alg_click"/>
+                </Border>
+                <Border BorderBrush="Gray" BorderThickness="0 0 0 1">
+                    <Button  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Center"  VerticalAlignment="Center" Content="Об авторе" Height="27" Width="197" Margin="0,0,-0.333,0" Click="Aut_click"/>
+                </Border>
+            </StackPanel>
+        </Border>
+        <TextBlock TextAlignment="Center" Text="2015 год" Margin="62,338,538.666,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Width="73"></TextBlock>
+        <TextBlock Name="TBDescription" Visibility="Visible" HorizontalAlignment="Left" Width="455" TextWrapping="Wrap" Text="&#xA;Данная программа DiffEq предназначена для построения графиков вида y=f(x,y), 
+                   &#xA;а также построения аппроксимироапнного решения дифференциального уравнения вида y' = f(x,y) с задачей Коши y(x0) = y0.&#xA;&#xA;Аппроксимация решения уравнения производится с помощью метода Рунге-Кутта-Фехльберга RKF45. 
+                   &#xA;&#xA;DiffEq позволяет построить одновременно до 10 графиков и решений с заданной толщиной, цветом, а также количеством шагов. Вы можете настроить пределы графика по своему усмотрению, открыв окно 'Параметры полотна' из меню 'Правка' или контекстного меню полотна.
+                   &#xA;&#xA;Вы можете сохранять изображение графика в файл, также возможно сохранение и загрузка состояния системы в файл со специальным расширением .dfq, чтобы потом продолжить работу, либо продемонстрировать кому-либо ваши графики. Все это доступно в меню 'Файл'.
+                   &#xA;&#xA;Все ваши действия во время работы заносятся в консоль. Также туда пишутся ошибки (например, возникаюшие при неверном вводе математической функции). В любой момент вы можете из меню 'Файл' или из контекстного меню консоли сохранить весь лог в текстовый файл" Margin="212,0,0,-1"></TextBlock>
+        <TextBlock Name="TBMath" Visibility="Hidden" HorizontalAlignment="Left" Width="455" TextWrapping="Wrap" Text="&#xA;Описание математических функций для ввода
+                   &#xA;&#xA;1) x и y можно вводить с любого регистра, десятичные числа вводятся точкой
+                   &#xA;&#xA;2) Вычисления производятся по стандартному приоритету т.ч. не забывайте ставить скобки
+                   &#xA;&#xA;3) Поддерживаемые фунции и константы
+                   &#xA;exp(x),EXP
+                   &#xA;sin(x),cos(x),tan(x),PI
+                   &#xA;Asin(x),Acos(x),Atan(x)
+                   &#xA;pow(x,y) - x в степени y
+                   &#xA;log(x,y) логарифм x по основанию y. Для ln(x) введите Log(x,EXP)
+                   &#xA;abs(x) - модуль
+                   " Margin="212,0,0,-1"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Name="TBButtons" Visibility="Hidden"  Width="455" TextWrapping="Wrap" Text="&#xA;Горячие клавиши:
+                   &#xA;&#xA;F1 - справка
+                   &#xA;Ctrl + N - новый файл
+                   &#xA;Ctrl + O - открыть файл
+                   &#xA;Ctrl + S - сохранить файл
+                   &#xA;Ctrl + Z - отменить действие
+                   &#xA;Ctrl + Y - вернуть действие
+                   " Margin="212,0,0,-1"></TextBlock>
+        <TextBlock Name="TBAlgorithm" Visibility="Hidden" HorizontalAlignment="Left" Width="455" TextWrapping="Wrap" Text="&#xA;Аппроксимация решения уравнения производится с помощью метода Рунге-Кутта-Фехльберга RKF45. 
+                   &#xA;Подробное опиание алгоритма можно посмотреть перейдя по ссылке.&#xA;" Margin="212,0,0,-1">
+            <TextBlock>
+            <Hyperlink Name="btnOpen" Click="alg_link">
+        <TextBlock Text="Подробнее"/>
+         </Hyperlink>
+        </TextBlock>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Name="TBAuthor" Visibility="Hidden"  Width="538" TextWrapping="Wrap" Text="&#xA;Автор проекта - Спирихин Максим Алексеевич
+                   &#xA;студент группы К04-171 НИЯУ 'МИФИ' в 2015 году.
+                   &#xA;&#xA;Преподаватель - Простокишин Валерий Михайлович
+                   " Margin="216,0,-79,-1"></TextBlock>
+
+    </Grid>
+</Window>
